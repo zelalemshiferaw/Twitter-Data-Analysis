@@ -89,18 +89,27 @@ class TweetDfExtractor:
         return is_sensitive
 
     def find_favourite_count(self)->list:
+        favourites_count = [tweet['user']['favourites_count']
+                            for tweet in self.tweets_list]
+        return favourites_count
         
     
     def find_retweet_count(self)->list:
-        retweet_count = 
-
+        retweet_count = [tweet['retweet_count'] for tweet in self.tweets_list]
+        return retweet_count
     def find_hashtags(self)->list:
-        hashtags =
+        hashtags = []
+        for tweet in self.tweets_list:
+            hashtags.append([hashtag['text']
+                            for hashtag in tweet['entities']['hashtags']])
+        return hashtags
 
     def find_mentions(self)->list:
-        mentions = 
-
-
+        mentions = []
+        for tweet in self.tweets_list:
+            mentions.append([user_mentions['screen_name']
+                             for user_mentions in tweet['entities']['user_mentions']])
+        return mentions
     def find_location(self)->list:
         try:
             location = self.tweets_list['user']['location']
