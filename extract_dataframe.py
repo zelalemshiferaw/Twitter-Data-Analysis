@@ -90,7 +90,6 @@ class TweetDfExtractor:
 
         return is_sensitive
 
-
     def find_favourite_count(self)->list:
         favourites_count = [tweet['user']['favourites_count']
                             for tweet in self.tweets_list]
@@ -113,7 +112,7 @@ class TweetDfExtractor:
             mentions.append([user_mentions['screen_name']
                              for user_mentions in tweet['entities']['user_mentions']])
         return mentions
-    def find_location(self)->list:
+    def find_location(self) -> list:
         try:
             location = [tweet['user']['location']
                         for tweet in self.tweets_list]
