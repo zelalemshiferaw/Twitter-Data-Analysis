@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 from textblob import TextBlob
+import re
 
 
 def read_json(json_file: str)->list:
@@ -117,6 +118,11 @@ class TweetDfExtractor:
             location = []
         
         return location
+    def find_clean_text(self) -> list:
+        clean_text = [re.sub("[^a-zA-Z0-9#@\s’,_]", "", text)
+                      for text in self.find_full_text()]
+        clean_text = [re.sub("\s+", " ", text) for text in clean_text]
+        return clean_text
 
     def find_lang(self) -> list:
 
@@ -128,7 +134,7 @@ class TweetDfExtractor:
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
         
-        columns = ['created_at', 'source', 'original_text','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
+        columns = ['created_at', 'source', 'full_text','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
             'original_author', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place']
         
         created_at = self.find_created_time()
@@ -139,13 +145,13 @@ class TweetDfExtractor:
         fav_count = self.find_favourite_count()
         retweet_count = self.find_retweet_count()
         screen_name = self.find_screen_name()
-        follower_count = self.find_followers_count()
+        followers_count = self.find_followers_count()
         friends_count = self.find_friends_count()
         sensitivity = self.is_sensitive()
         hashtags = self.find_hashtags()
         mentions = self.find_mentions()
         location = self.find_location()
-        data = zip(created_at, source, full_text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, follower_count, friends_count, sensitivity, hashtags, mentions, location)
+        data = zip(created_at, source, full_text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, followers_count, friends_count, sensitivity, hashtags, mentions, location)
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
@@ -159,7 +165,7 @@ if __name__ == "__main__":
     # required column to be generated you should be creative and add more features
     columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
     'original_author', 'screen_count', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place', 'place_coord_boundaries']
-    _, tweet_list = read_json("./data/global_twitter_data.json")
+    _, tweet_list = read_json("./tests/global_twitter_test_data.json")
     tweet = TweetDfExtractor(tweet_list)
     tweet_df = tweet.get_tweet_df(save=True) 
 
