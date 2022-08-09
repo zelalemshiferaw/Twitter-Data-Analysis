@@ -62,6 +62,12 @@ class Clean_Tweets:
         df = df.query("lang == 'en' ")
 
         return df
+    def extract_twitter_source(self, source: str):
+        """
+        returnssource device from source text
+        """
+        res = re.split('<|>', source)[2].strip()
+        return res
     def remove_place_characters(self, df: pd.DataFrame):
         """
         removes non-alphanumeric characters with the exception of underscore hyphen and space

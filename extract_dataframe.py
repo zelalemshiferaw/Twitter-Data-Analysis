@@ -43,18 +43,28 @@ class TweetDfExtractor:
         
     def find_full_text(self)->list:
         text = [tweet['full_text'] for tweet in self.tweets_list]
+        text = [tweet['full_text'].replace(',', ' ')
+                for tweet in self.tweets_list]
         return text
        
     
     def find_sentiments(self, text)->list:
         polarity = []
         subjectivity = []
+        sentiment = []
+        xo = True
         for t in text:
-            sentiment = TextBlob(t).sentiment
-            polarity.append(sentiment.polarity)
-            subjectivity.append(sentiment.subjectivity)
-        self.subjectivity = subjectivity        
-        return polarity, self.subjectivity
+            each_sentiment = TextBlob(t).sentiment
+            polarity.append(each_sentiment.polarity)
+            subjectivity.append(each_sentiment.subjectivity)
+            if each_sentiment.polarity > 0:
+                sentiment.append("positive")
+            elif each_sentiment.polarity < 0:
+                sentiment.append("negative")
+            else:
+                sentiment.append("neutral")
+        self.subjectivity = subjectivity
+        return polarity, self.subjectivity, sentiment
 
     def find_created_time(self)->list:
         created_at = [tweet['created_at'] for tweet in self.tweets_list]       
@@ -136,13 +146,13 @@ class TweetDfExtractor:
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
         
-        columns = ['created_at', 'source', 'full_text','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
+        columns = ['created_at', 'source', 'full_text','polarity','subjectivity','sentiment','lang', 'favorite_count', 'retweet_count', 
             'original_author', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place']
         
         created_at = self.find_created_time()
         source = self.find_source()
         full_text = self.find_full_text()
-        polarity, subjectivity = self.find_sentiments(full_text)
+        polarity, subjectivity,sentiment = self.find_sentiments(full_text)
         lang = self.find_lang()
         fav_count = self.find_favourite_count()
         retweet_count = self.find_retweet_count()
@@ -153,9 +163,10 @@ class TweetDfExtractor:
         hashtags = self.find_hashtags()
         mentions = self.find_mentions()
         location = self.find_location()
+        full_text = self.find_clean_text()
 
 
-        data = zip(created_at, source, full_text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, followers_count, friends_count, sensitivity, hashtags, mentions, location)
+        data = zip(created_at, source, full_text, polarity, subjectivity,sentiment, lang, fav_count, retweet_count, screen_name, followers_count, friends_count, sensitivity, hashtags, mentions, location)
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
