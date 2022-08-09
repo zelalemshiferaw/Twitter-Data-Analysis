@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 import sys, os
 
-sys.path.append(os.path.abspath(os.path.join("../Twitter-Data-Analysis")))
+sys.path.append(os.path.abspath(os.path.join("../Twitter-Data-Analysis/")))
 
 from extract_dataframe import read_json
 from extract_dataframe import TweetDfExtractor
@@ -68,15 +68,16 @@ class TestTweetDfExtractor(unittest.TestCase):
 
         self.assertEqual(self.df.find_full_text(), text)
 
-    # def test_find_sentiments(self):
-    #     print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
+    def test_find_sentiments(self):
+        print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
 
-    #     self.assertEqual(
-    #         self.df.find_sentiments(self.df.find_full_text()),
-    #         (
-              
-    #         ),
-    #     )
+        self.assertEqual(
+            self.df.find_sentiments(self.df.find_full_text()),
+            (
+              [0.2, 0.05555555555555556, 0.0, 0.7, 0.1],
+              [0.375, 0.8555555555555555, 0.0, 0.6000000000000001, 0.45]
+            ),
+        )
 
 
     def test_find_screen_name(self):
