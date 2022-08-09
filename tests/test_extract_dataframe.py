@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 import sys, os
 
-sys.path.append(os.path.abspath(os.path.join('../Twitter-Data-Analysis/')))
+sys.path.append(os.path.abspath(os.path.join('..')))
 
 from extract_dataframe import read_json
 from extract_dataframe import TweetDfExtractor
@@ -11,7 +11,7 @@ from extract_dataframe import TweetDfExtractor
 # we will need about 5 tweet samples. 
 # Create a sample not more than 10 tweets and place it in a json file.
 # Provide the path to the samples tweets file you created below
-sampletweetsjsonfile = "./tests/global_twitter_test_data.json"   #put here the path to where you placed the file e.g. ./sampletweets.json. 
+sampletweetsjsonfile = "global_twitter_test_data.json"   #put here the path to where you placed the file e.g. ./sampletweets.json. 
 _, tweet_list = read_json(sampletweetsjsonfile)
 
 columns = [
@@ -53,7 +53,7 @@ class TestTweetDfExtractor(unittest.TestCase):
 
     def test_find_statuses_count(self):
         self.assertEqual(
-            self.df.find_statuses_count(),[107188,24775,48446,24775,365]
+            self.df.find_statuses_count(),[107188, 48446, 365, 5831, 3865]
         )
 
     def test_find_full_text(self):
@@ -80,19 +80,19 @@ class TestTweetDfExtractor(unittest.TestCase):
 
 
     def test_find_screen_name(self):
-        name = ['CGMeifangZhang','jmarzola1','CGMeifangZhang','CGMeifangZhang','wilson_chnns']
+        name = ['jmarzola1', 'xuejianosaka', 'wilson_chnns', 'ZIisq', 'Aurora20288302']
         self.assertEqual(self.df.find_screen_name(), name)
 
     def test_find_followers_count(self):
-        f_count = [213,87133,45242,87133,28]
+        f_count = [213, 45242, 28, 65, 9]
         self.assertEqual(self.df.find_followers_count(), f_count)
 
     def test_find_friends_count(self):
-        friends_count =[877,1288,1505,265,272]
+        friends_count =[877, 1505, 265, 272, 178]
         self.assertEqual(self.df.find_friends_count(), friends_count)
 
     def test_find_is_sensitive(self):
-        self.assertEqual(self.df.is_sensitive(), [None,None,None,None,None])
+        self.assertEqual(self.df.is_sensitive(), [])
 
 
     # def test_find_hashtags(self):
