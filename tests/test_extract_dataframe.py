@@ -57,6 +57,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         )
 
     def test_find_full_text(self):
+        
         text = [
             "RT @CGMeifangZhang: Chinese ambassador to the US has detailed why #USA House Speaker Nancy #Pelosi's visit to #Taiwan was opposed by #China\u2026",
             "RT @CGMeifangZhang: #Latest When the PLA conducted massive drills around #Taiwan in response to the serious provocations made by the US on\u2026",
@@ -66,16 +67,17 @@ class TestTweetDfExtractor(unittest.TestCase):
 
         ]
 
-        self.assertEqual(self.df.find_full_text(), text)
+        self.assertEqual(self.df.find_clean_text(), text)
 
     def test_find_sentiments(self):
-        # print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
+        #print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
 
         self.assertEqual(
             self.df.find_sentiments(self.df.find_full_text()),
             (
               [0.2, 0.05555555555555556, 0.0, 0.7, 0.1],
-              [0.375, 0.8555555555555555, 0.0, 0.6000000000000001, 0.45]
+              [0.375, 0.8555555555555555, 0.0, 0.6000000000000001, 0.45],
+              ['positive', 'positive', 'neutral', 'positive', 'positive']
             ),
         )
 
