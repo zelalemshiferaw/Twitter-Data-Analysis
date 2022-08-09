@@ -57,15 +57,9 @@ class TestTweetDfExtractor(unittest.TestCase):
         )
 
     def test_find_full_text(self):
-        
-        text = [
-            "RT @CGMeifangZhang: Chinese ambassador to the US has detailed why #USA House Speaker Nancy #Pelosi's visit to #Taiwan was opposed by #China\u2026",
-            "RT @CGMeifangZhang: #Latest When the PLA conducted massive drills around #Taiwan in response to the serious provocations made by the US on\u2026",
-            "Wilson Chinonso Blog: Nigerian tribes, the list and facts https://t.co/E58nxeVz0j \n\n#China #ChinaTaiwan #ManUnited",
-            "RT @IndoPac_Info: A good infographic of #China's missile launches on #Taiwan on August 4th.\n\n#ChinaTaiwanCrisis https://t.co/STzRr9fhU5",
-            "RT @shen_shiwei: Roger Waters: \"They're (Chinese) not encircling #Taiwan, Taiwan is part of China, and that's been absolutely accepted by t\u2026"
+        print(f"5 full_text: {self.df.find_clean_text()}")
 
-        ]
+        text = ['RT @CGMeifangZhang Chinese ambassador to the US has detailed why #USA House Speaker Nancy #Pelosis visit to #Taiwan was opposed by #China', 'RT @CGMeifangZhang #Latest When the PLA conducted massive drills around #Taiwan in response to the serious provocations made by the US on', 'Wilson Chinonso Blog Nigerian tribes the list and facts httpstcoE58nxeVz0j #China #ChinaTaiwan #ManUnited', 'RT @IndoPac_Info A good infographic of #Chinas missile launches on #Taiwan on August 4th #ChinaTaiwanCrisis httpstcoSTzRr9fhU5', 'RT @shen_shiwei Roger Waters Theyre Chinese not encircling #Taiwan Taiwan is part of China and thats been absolutely accepted by t']
 
         self.assertEqual(self.df.find_clean_text(), text)
 
