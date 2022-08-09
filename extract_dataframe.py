@@ -127,7 +127,7 @@ class TweetDfExtractor:
 
         lang = [tweet['lang'] for tweet in self.tweets_list]
 
-        return lang
+        return lang  
         
         
     def get_tweet_df(self, save=False)->pd.DataFrame:
@@ -150,7 +150,9 @@ class TweetDfExtractor:
         hashtags = self.find_hashtags()
         mentions = self.find_mentions()
         location = self.find_location()
+
         data = zip(created_at, source, full_text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, followers_count, friends_count, sensitivity, hashtags, mentions, location)
+
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
