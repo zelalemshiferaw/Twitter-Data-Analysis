@@ -156,7 +156,6 @@ class TweetDfExtractor:
 
 
         data = zip(created_at, source, full_text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, followers_count, friends_count, sensitivity, hashtags, mentions, location)
-
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
