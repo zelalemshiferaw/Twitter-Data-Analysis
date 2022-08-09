@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 import sys, os
 
-sys.path.append(os.path.abspath(os.path.join("../..")))
+sys.path.append(os.path.abspath(os.path.join('../Twitter-Data-Analysis/')))
 
 from extract_dataframe import read_json
 from extract_dataframe import TweetDfExtractor
@@ -11,7 +11,7 @@ from extract_dataframe import TweetDfExtractor
 # we will need about 5 tweet samples. 
 # Create a sample not more than 10 tweets and place it in a json file.
 # Provide the path to the samples tweets file you created below
-sampletweetsjsonfile = ""   #put here the path to where you placed the file e.g. ./sampletweets.json. 
+sampletweetsjsonfile = "./tests/global_twitter_test_data.json"   #put here the path to where you placed the file e.g. ./sampletweets.json. 
 _, tweet_list = read_json(sampletweetsjsonfile)
 
 columns = [
@@ -53,38 +53,46 @@ class TestTweetDfExtractor(unittest.TestCase):
 
     def test_find_statuses_count(self):
         self.assertEqual(
-            self.df.find_statuses_count(), <provide a list of the first five status counts>
+            self.df.find_statuses_count(),[107188,24775,48446,24775,365]
         )
 
     def test_find_full_text(self):
-        text = <provide a list of the first five full texts>
+        text = [
+            "RT @CGMeifangZhang: Chinese ambassador to the US has detailed why #USA House Speaker Nancy #Pelosi's visit to #Taiwan was opposed by #China\u2026",
+            "RT @CGMeifangZhang: #Latest When the PLA conducted massive drills around #Taiwan in response to the serious provocations made by the US on\u2026",
+            "Wilson Chinonso Blog: Nigerian tribes, the list and facts https://t.co/E58nxeVz0j \n\n#China #ChinaTaiwan #ManUnited",
+            "RT @IndoPac_Info: A good infographic of #China's missile launches on #Taiwan on August 4th.\n\n#ChinaTaiwanCrisis https://t.co/STzRr9fhU5",
+            "RT @shen_shiwei: Roger Waters: \"They're (Chinese) not encircling #Taiwan, Taiwan is part of China, and that's been absolutely accepted by t\u2026"
+
+        ]
 
         self.assertEqual(self.df.find_full_text(), text)
 
-    def test_find_sentiments(self):
-        self.assertEqual(
-            self.df.find_sentiments(self.df.find_full_text()),
-            (
-                <provide a list of the first five sentiment values>,
-                <provide a list of the first five polarity values>,
-            ),
-        )
+    # def test_find_sentiments(self):
+    #     print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
+
+    #     self.assertEqual(
+    #         self.df.find_sentiments(self.df.find_full_text()),
+    #         (
+              
+    #         ),
+    #     )
 
 
     def test_find_screen_name(self):
-        name = <provide a list of the first five screen names>
+        name = ['CGMeifangZhang','jmarzola1','CGMeifangZhang','CGMeifangZhang','wilson_chnns']
         self.assertEqual(self.df.find_screen_name(), name)
 
     def test_find_followers_count(self):
-        f_count = <provide a list of the first five follower counts>
+        f_count = [213,87133,45242,87133,28]
         self.assertEqual(self.df.find_followers_count(), f_count)
 
     def test_find_friends_count(self):
-        friends_count = <provide a list of the first five friend's counts>
+        friends_count =[877,1288,1505,265,272]
         self.assertEqual(self.df.find_friends_count(), friends_count)
 
     def test_find_is_sensitive(self):
-        self.assertEqual(self.df.is_sensitive(), <provide a list of the first five is_sensitive values>)
+        self.assertEqual(self.df.is_sensitive(), [None,None,None,None,None])
 
 
     # def test_find_hashtags(self):
