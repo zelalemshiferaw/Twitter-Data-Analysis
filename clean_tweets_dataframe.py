@@ -25,7 +25,7 @@ class Clean_Tweets:
         drop duplicate rows
         """
 
-        df = df.drop_duplicates()
+        df = self.df.drop_duplicates()
         return df
         
         
@@ -60,5 +60,15 @@ class Clean_Tweets:
         """
         
         df = df.query("lang == 'en' ")
+
+        return df
+    def remove_place_characters(self, df: pd.DataFrame):
+        """
+        removes non-alphanumeric characters with the exception of underscore hyphen and space
+        from the specified column
+        """
+
+        df["place"] = df["place"].apply(
+            lambda text: re.sub("[^a-zA-Z0-9\s_-]", "", text))
 
         return df
