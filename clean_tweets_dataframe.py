@@ -1,5 +1,4 @@
 
-
 import pandas as pd
 import re
 from datetime import datetime
@@ -25,15 +24,15 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        
+
         df = df.drop_duplicates()
         return df
+        
         
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
         convert column to datetime
         """
-
         df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
 
         df = df[df['created_at'] >= '2020-12-31' ]
@@ -61,4 +60,5 @@ class Clean_Tweets:
         """
         
         df = df.query("lang == 'en' ")
+
         return df
