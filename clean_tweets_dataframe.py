@@ -1,7 +1,7 @@
+
 import pandas as pd
 import re
 from datetime import datetime
-
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -24,10 +24,11 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
+
         df = df.drop_duplicates()
         return df
         
-        return df
+        
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
         convert column to datetime
@@ -59,5 +60,5 @@ class Clean_Tweets:
         """
         
         df = df.query("lang == 'en' ")
-        
+
         return df
