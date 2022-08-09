@@ -69,7 +69,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.find_full_text(), text)
 
     def test_find_sentiments(self):
-        print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
+        # print(f"5 sentiments: {self.df.find_sentiments(self.df.find_full_text())}")
 
         self.assertEqual(
             self.df.find_sentiments(self.df.find_full_text()),
