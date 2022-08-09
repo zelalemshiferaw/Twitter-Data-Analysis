@@ -81,13 +81,15 @@ class TweetDfExtractor:
                          for tweet in self.tweets_list]
         return friends_count
 
-    def is_sensitive(self)->list:
+    def is_sensitive(self) -> list:
         try:
-            is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
+            is_sensitive = [tweet['possibly_sensitive'] if 'possibly_sensitive' in tweet else None
+                            for tweet in self.tweets_list]
         except KeyError:
             is_sensitive = []
 
         return is_sensitive
+
 
     def find_favourite_count(self)->list:
         favourites_count = [tweet['user']['favourites_count']
@@ -113,10 +115,11 @@ class TweetDfExtractor:
         return mentions
     def find_location(self)->list:
         try:
-            location = self.tweets_list['user']['location']
+            location = [tweet['user']['location']
+                        for tweet in self.tweets_list]
         except TypeError:
             location = []
-        
+
         return location
     def find_clean_text(self) -> list:
         clean_text = [re.sub("[^a-zA-Z0-9#@\s’,_]", "", text)
@@ -154,7 +157,6 @@ class TweetDfExtractor:
 
 
         data = zip(created_at, source, full_text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, followers_count, friends_count, sensitivity, hashtags, mentions, location)
-
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
