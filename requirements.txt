@@ -1,2 +1,4 @@
 pandas>=1.1.0
 textblob>=0.15.3
+plotly==5.8.0
+wordcloud>=1.8.1
