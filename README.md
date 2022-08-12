@@ -1,3 +1,5 @@
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 # Twitter-Data-Analysis
 
 **Table of content**
@@ -46,6 +48,11 @@ This folder holds the data of the project
 ### Dashboard 
 This folder holds streamlit dashboard codes
 
+
+
 ## Contact
 Zelalem Shiferaw - zelalemshiferaw71921@gmail.com
 
+
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/zelalem-shiferaw-48a070187
