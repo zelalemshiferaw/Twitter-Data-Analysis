@@ -5,8 +5,6 @@
  [Twitter-Data-Analysis](#Twitter-Data-Analysis)
   - [Overview](#overview)
   - [Data Source](#data-source)
-  - [Installation Guide](#installation-guide)
-  - [Project Structure](#project-structure)
     - [notebooks](#notebooks)
     - [data](#data)
     - [dashboard](#dashboard)
@@ -23,19 +21,7 @@
 Data source For this Project was given as sampled twitter data.
 </p>
 
-## Installation Guide
 
-Clone The projecct
-        
-            git clone https://github.com/tesfayealex/Twitter-Data-Analysis.git](https://github.com/zelalemshiferaw/Twitter-Data-Analysis.git
-            
-Go to directory
-            cd Twitter-Data-Analysis
-            
-Install required modules
-            pip install -r requirements.txt
-        
-  
 ## Project Structure
 
 ### Notebooks 
