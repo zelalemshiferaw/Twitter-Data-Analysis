@@ -32,7 +32,7 @@ Clone The projecct
 Go to directory
             cd Twitter-Data-Analysis
             
-Install required modles
+Install required modules
             pip install -r requirements.txt
         
   
