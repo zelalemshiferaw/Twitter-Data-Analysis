@@ -7,9 +7,9 @@
   - [Installation](#installation)
   - [Data](#data)
   - [Project Structure](#project-Structure)
-    - [notebooks](#notebooks)
-    - [data](#data)
-    - [dashboard](#dashboard)
+    - [Notebooks](#notebooks)
+    - [Data](#data)
+    - [Dashboard](#dashboard)
   - [Contact](#contact)
 
 
@@ -43,7 +43,7 @@ This folder holds the nooteboks used to process and visualize the data
 This folder holds the data of the project
   - Global preprocessed data
 
-### dashboard 
+### Dashboard 
 This folder holds streamlit dashboard codes
 
 ## Contact
