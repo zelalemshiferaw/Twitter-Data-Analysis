@@ -21,14 +21,13 @@
 <p>
  The main objective of this project is to analyze the sentiments and topics of tweets.
 </p>
+
 ## Installation
-   <p> Clone repository </p>
+
        git clone https://github.com/zelalemshiferaw/Twitter-Data-Analysis.git
-   
-   <p> Change directory to Twitter-Data Analysis</p>
-        cd Twitter-Data-Analysis
-   <p> Install all requirements </p>
-        pip install -r requirements.txt
+       cd Twitter-Data-Analysis 
+       pip install -r requirements.txt
+        
 ## Data
 <p>
 Data source For this Project was given as sampled twitter data.
